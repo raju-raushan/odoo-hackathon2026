@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sign In | TransitOps</title>
+<meta name="description" content="Sign in to your TransitOps dashboard to manage fleet operations and logistics."/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet"/>
+<link rel="stylesheet" href="../CSS/signUp.css"/>
+</head>
+<body>
+<div class="bg-orb-1"></div>
+<div class="bg-orb-2"></div>
+
+<main class="auth-card" id="signin-page">
+  <section class="visual-panel">
+    <img class="bg-placeholder" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80" alt="Logistics Hub"/>
+    <div class="bg-overlay"></div>
+    <div class="content">
+      <div class="vp-header">
+        <div class="logo-row">
+          <span class="material-symbols-outlined">speed</span>
+          <h1>TransitOps</h1>
+        </div>
+        <p class="tagline">Precision Logistics &amp; Fleet Intelligence</p>
+      </div>
+      <div>
+        <div class="vp-card">
+          <h2><span class="material-symbols-outlined">hub</span> Enterprise Velocity</h2>
+          <p>Leverage sub-second latency tracking and AI-driven predictive maintenance for global fleet optimization.</p>
+        </div>
+      </div>
+      <div class="vp-footer">
+        <p class="version">Platform Core v4.2.0</p>
+        <div class="dots">
+          <div class="dot active"></div>
+          <div class="dot dim"></div>
+          <div class="dot dim"></div>
+        </div>
+      </div>
+    </div>
+    <div class="atmo-blur"></div>
+  </section>
+
+  <section class="form-panel">
+    <div class="form-inner">
+      <div class="form-header">
+        <h2>Welcome Back</h2>
+        <p>Sign in to manage your operational metrics.</p>
+      </div>
+
+      <div class="error-banner" id="error-banner" style="display:none;">
+        <span class="material-symbols-outlined">error</span>
+        <div>
+          <p class="eb-title">Authentication required</p>
+          <p class="eb-desc">Account locked after multiple failed attempts. Please contact support.</p>
+        </div>
+      </div>
+
+      <form class="form-group" id="signin-form">
+        <div class="field">
+          <label for="email">Email Address</label>
+          <div class="input-wrap">
+            <span class="material-symbols-outlined left-icon">mail</span>
+            <input type="email" id="email" name="email" placeholder="name@transitops.io" required/>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="label-row">
+            <label for="password">Password</label>
+            <a href="#" class="forgot-link">Forgot Access?</a>
+          </div>
+          <div class="input-wrap">
+            <span class="material-symbols-outlined left-icon">lock</span>
+            <input type="password" id="password" name="password" placeholder="••••••••" required/>
+            <button type="button" class="password-toggle" id="password-toggle">
+              <span class="material-symbols-outlined">visibility</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="workspace-role">Workspace Role</label>
+          <div class="select-wrap">
+            <div class="input-wrap">
+              <span class="material-symbols-outlined left-icon">badge</span>
+              <select id="workspace-role" name="role" required>
+                <option value="" disabled selected>Select your role</option>
+                <option value="fleet-manager">Fleet Manager</option>
+                <option value="dispatcher">Dispatcher</option>
+                <option value="safety-officer">Safety Officer</option>
+                <option value="financial-analyst">Financial Analyst</option>
+              </select>
+            </div>
+            <span class="material-symbols-outlined arrow-icon">expand_more</span>
+          </div>
+        </div>
+
+        <div class="remember-row">
+          <input type="checkbox" id="remember" name="remember"/>
+          <label for="remember">Keep me logged in for 30 days</label>
+        </div>
+
+        <button type="submit" class="btn-submit" id="signin-btn">
+          Sign In to Dashboard
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+      </form>
+
+      <footer class="form-footer">
+        <p>New to TransitOps? <a href="register.html">Request Access</a></p>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<script src="../JS/signUp.js"></script>
+</body>
+</html>
