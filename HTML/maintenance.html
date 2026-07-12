@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Maintenance Hub | TransitOps</title>
+<meta name="description" content="TransitOps maintenance management — log service records, track fleet health, and manage shop availability."/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet"/>
+<link rel="stylesheet" href="../CSS/maintenance.css"/>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="brand"><h1>TransitOps</h1><p>Smart Fleet Management</p></div>
+  <nav>
+    <a class="nav-item" href="dashboard.html" id="nav-dashboard"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
+    <a class="nav-item" href="#" id="nav-fleet"><span class="material-symbols-outlined">local_shipping</span>Fleet</a>
+    <a class="nav-item" href="#" id="nav-drivers"><span class="material-symbols-outlined">person</span>Drivers</a>
+    <a class="nav-item" href="#" id="nav-trips"><span class="material-symbols-outlined">route</span>Trips</a>
+    <a class="nav-item active" href="#" id="nav-maintenance"><span class="material-symbols-outlined">build</span>Maintenance</a>
+    <a class="nav-item" href="fuelExpense.html" id="nav-fuel"><span class="material-symbols-outlined">local_gas_station</span>Fuel &amp; Expenses</a>
+    <a class="nav-item" href="#" id="nav-analytics"><span class="material-symbols-outlined">analytics</span>Analytics</a>
+    <a class="nav-item" href="profile.html" id="nav-settings"><span class="material-symbols-outlined">settings</span>Settings</a>
+  </nav>
+  <div class="sidebar-footer">
+    <a class="nav-item" href="#"><span class="material-symbols-outlined">contact_support</span>Support</a>
+    <a class="nav-item" href="signUp.html"><span class="material-symbols-outlined">logout</span>Log Out</a>
+  </div>
+</aside>
+
+<div class="main-wrap">
+  <header class="topbar">
+    <div class="search-box">
+      <span class="material-symbols-outlined">search</span>
+      <input type="text" placeholder="Search vehicle history, parts, or service codes..." id="search-input"/>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-icons">
+        <button id="notif-btn"><span class="material-symbols-outlined">notifications</span></button>
+        <button><span class="material-symbols-outlined">help</span></button>
+      </div>
+      <div class="user-info">
+        <div class="text"><p>Raven K.</p><p>Dispatcher</p></div>
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMSj2pDwArAQHU9ZjegkOyrHgxjo0tbHHpLSuTevdSP1ZQ3cR01FwmDeQxLoEP5EWReE-sda7xRLdXVfXNQ6OoAMxTFmwQ7ViyE9-iTmHCumLnMHkv5__s6nw_bm_sgRmbFYlNtG3zGEKJO73RhQfolcv-v-jVUxFlTwsImH6VDiYwbWyFCviv4DjmNymMSiR2Pipx-TegPk-B48f4dJXQpZudkKqztunW3kBTSLX9zEf7Cx9CbOXS1g" alt="Raven K."/>
+      </div>
+    </div>
+  </header>
+
+  <main class="content-area">
+    <div class="content-container">
+      <div class="page-title">
+        <h2>Maintenance Hub</h2>
+        <p>Manage fleet health, service intervals, and shop availability.</p>
+      </div>
+
+      <div class="main-grid">
+        <div class="left-col">
+          <div class="card card-orange">
+            <div class="card-body">
+              <div class="card-header-row">
+                <h3>LOG SERVICE RECORD</h3>
+                <span class="material-symbols-outlined">history_edu</span>
+              </div>
+              <form id="service-form" onsubmit="event.preventDefault()">
+                <div class="form-group">
+                  <label>Vehicle</label>
+                  <select class="form-control" id="vehicle-select">
+                    <option>VAN-05</option>
+                    <option>TRUCK-11</option>
+                    <option>MINI-03</option>
+                    <option>BUS-22</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Service Type</label>
+                  <input class="form-control" type="text" placeholder="e.g. Oil Change, Tire Rotation" id="service-type"/>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Cost ($)</label>
+                    <input class="form-control" type="number" placeholder="2,500" id="service-cost"/>
+                  </div>
+                  <div class="form-group">
+                    <label>Date</label>
+                    <input class="form-control" type="date" value="2026-07-07" id="service-date"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Status Toggle</label>
+                  <div class="status-toggle" id="status-toggle">
+                    <button type="button" class="toggle-btn active" data-status="active">Active Record</button>
+                    <button type="button" class="toggle-btn" data-status="completed">Completed</button>
+                  </div>
+                </div>
+                <button class="btn-save-record" type="submit" id="save-record-btn">Save Record</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="logic-card">
+            <h4>TRANSITION LOGIC</h4>
+            <div class="logic-row">
+              <span class="logic-dot green"></span>
+              <span class="logic-text green">Available</span>
+              <span class="material-symbols-outlined logic-arrow">arrow_forward</span>
+              <span class="logic-text amber">In Shop</span>
+              <span class="logic-note">(Creating record)</span>
+            </div>
+            <div class="logic-row">
+              <span class="logic-dot amber"></span>
+              <span class="logic-text amber">In Shop</span>
+              <span class="material-symbols-outlined logic-arrow">arrow_forward</span>
+              <span class="logic-text green">Available</span>
+              <span class="logic-note">(Closing record)</span>
+            </div>
+            <p class="logic-warning">Note: In Shop vehicles are automatically removed from the active dispatch pool.</p>
+          </div>
+        </div>
+
+        <div class="right-col">
+          <div class="stats-row">
+            <div class="stat-mini-card">
+              <div class="stat-icon indigo">
+                <span class="material-symbols-outlined">car_repair</span>
+              </div>
+              <div>
+                <p class="stat-mini-label">Current in Shop</p>
+                <p class="stat-mini-value" id="stat-shop">12 Vehicles</p>
+              </div>
+            </div>
+            <div class="stat-mini-card">
+              <div class="stat-icon amber">
+                <span class="material-symbols-outlined">payments</span>
+              </div>
+              <div>
+                <p class="stat-mini-label">MTD Spending</p>
+                <p class="stat-mini-value" id="stat-spending">$42,800</p>
+              </div>
+            </div>
+            <div class="stat-mini-card">
+              <div class="stat-icon emerald">
+                <span class="material-symbols-outlined">check_circle</span>
+              </div>
+              <div>
+                <p class="stat-mini-label">Fleet Uptime</p>
+                <p class="stat-mini-value" id="stat-uptime">94.2%</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-blue">
+            <div class="table-header">
+              <h3>SERVICE LOG</h3>
+              <div class="table-actions">
+                <button class="btn-table-action" id="filter-btn">
+                  <span class="material-symbols-outlined">filter_list</span>
+                  Filter
+                </button>
+                <button class="btn-table-action" id="export-btn">
+                  <span class="material-symbols-outlined">download</span>
+                  Export
+                </button>
+              </div>
+            </div>
+            <div style="overflow-x:auto">
+              <table class="service-table" id="service-table">
+                <thead>
+                  <tr>
+                    <th>Vehicle</th>
+                    <th>Service Description</th>
+                    <th class="text-right">Cost ($)</th>
+                    <th>Status</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="vehicle-cell">
+                        <span class="material-symbols-outlined">local_shipping</span>
+                        <span>VAN-05</span>
+                      </div>
+                    </td>
+                    <td>Oil Change &amp; Filter</td>
+                    <td class="text-right cost-cell">2,500.00</td>
+                    <td><span class="maint-status-badge in-shop"><span class="dot"></span>In Shop</span></td>
+                    <td class="text-center"><button class="row-action-btn"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="vehicle-cell">
+                        <span class="material-symbols-outlined">local_shipping</span>
+                        <span>TRUCK-11</span>
+                      </div>
+                    </td>
+                    <td>Full Engine Overhaul</td>
+                    <td class="text-right cost-cell">18,000.00</td>
+                    <td><span class="maint-status-badge completed"><span class="dot"></span>Completed</span></td>
+                    <td class="text-center"><button class="row-action-btn"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="vehicle-cell">
+                        <span class="material-symbols-outlined">local_shipping</span>
+                        <span>MINI-03</span>
+                      </div>
+                    </td>
+                    <td>Tyre Replacement Set</td>
+                    <td class="text-right cost-cell">6,200.00</td>
+                    <td><span class="maint-status-badge in-shop"><span class="dot"></span>In Shop</span></td>
+                    <td class="text-center"><button class="row-action-btn"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="vehicle-cell">
+                        <span class="material-symbols-outlined">local_shipping</span>
+                        <span>BUS-22</span>
+                      </div>
+                    </td>
+                    <td>Brake System Refurbish</td>
+                    <td class="text-right cost-cell">4,150.00</td>
+                    <td><span class="maint-status-badge available"><span class="dot"></span>Available</span></td>
+                    <td class="text-center"><button class="row-action-btn"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="pagination">
+              <p class="pagination-info">Showing 1-4 of 128 maintenance records</p>
+              <div class="pagination-buttons">
+                <button class="page-btn" disabled id="page-prev"><span class="material-symbols-outlined">chevron_left</span></button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn" id="page-next"><span class="material-symbols-outlined">chevron_right</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<button class="fab" id="fab-emergency">
+  <span class="material-symbols-outlined">emergency_recording</span>
+  <span class="fab-tooltip">Emergency Repair</span>
+</button>
+
+<script src="../JS/maintenance.js"></script>
+</body>
+</html>

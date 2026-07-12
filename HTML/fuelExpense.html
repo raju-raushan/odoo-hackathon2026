@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fuel &amp; Expenses | TransitOps</title>
+<meta name="description" content="TransitOps fuel and expenses dashboard — track operational costs, tolls, and maintenance spending across the fleet."/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet"/>
+<link rel="stylesheet" href="../CSS/fuelExpense.css"/>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="brand"><h1>TransitOps</h1><p>Smart Fleet Management</p></div>
+  <nav>
+    <a class="nav-item" href="dashboard.html" id="nav-dashboard"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
+    <a class="nav-item" href="#" id="nav-fleet"><span class="material-symbols-outlined">local_shipping</span>Fleet</a>
+    <a class="nav-item" href="#" id="nav-drivers"><span class="material-symbols-outlined">person</span>Drivers</a>
+    <a class="nav-item" href="#" id="nav-trips"><span class="material-symbols-outlined">route</span>Trips</a>
+    <a class="nav-item" href="maintenance.html" id="nav-maintenance"><span class="material-symbols-outlined">build</span>Maintenance</a>
+    <a class="nav-item active" href="#" id="nav-fuel"><span class="material-symbols-outlined">local_gas_station</span>Fuel &amp; Expenses</a>
+    <a class="nav-item" href="#" id="nav-analytics"><span class="material-symbols-outlined">analytics</span>Analytics</a>
+    <a class="nav-item" href="profile.html" id="nav-settings"><span class="material-symbols-outlined">settings</span>Settings</a>
+  </nav>
+  <div class="sidebar-footer">
+    <a class="nav-item" href="#"><span class="material-symbols-outlined">contact_support</span>Support</a>
+    <a class="nav-item" href="signUp.html"><span class="material-symbols-outlined">logout</span>Log Out</a>
+  </div>
+</aside>
+
+<div class="main-wrap">
+  <header class="topbar">
+    <div class="search-box">
+      <span class="material-symbols-outlined">search</span>
+      <input type="text" placeholder="Search logs, vehicles, or trips..." id="search-input"/>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-icons">
+        <button id="notif-btn"><span class="material-symbols-outlined">notifications</span></button>
+        <button><span class="material-symbols-outlined">help</span></button>
+      </div>
+      <div class="user-info">
+        <div class="text"><p>Raven K.</p><p>Dispatcher</p></div>
+        <div class="avatar-placeholder">RK</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="content-area">
+    <div class="content-container">
+      <div class="page-header-row">
+        <div class="page-title">
+          <h2>Fuel &amp; Expense Management</h2>
+          <p>Track, audit, and optimize fleet operational costs across all routes.</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-action-primary" id="log-fuel-btn">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_gas_station</span>
+            Log Fuel
+          </button>
+          <button class="btn-action-dark" id="add-expense-btn">
+            <span class="material-symbols-outlined">add_circle</span>
+            Add Expense
+          </button>
+        </div>
+      </div>
+
+      <section class="bento-section">
+        <div class="bento-header">
+          <div class="bento-title-wrap">
+            <div class="bento-accent-bar indigo"></div>
+            <h3>FUEL LOGS</h3>
+          </div>
+          <button class="bento-trend-btn" id="trend-btn">
+            View Historical Trends
+            <span class="material-symbols-outlined">trending_up</span>
+          </button>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="expense-table" id="fuel-logs-table">
+            <thead>
+              <tr>
+                <th>VEHICLE</th>
+                <th>DATE</th>
+                <th>LITERS</th>
+                <th class="text-right">FUEL COST ($)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-bold">VAN-05</td>
+                <td>05 Jul 2026</td>
+                <td>42 L</td>
+                <td class="text-right mono">3,150.00</td>
+              </tr>
+              <tr>
+                <td class="font-bold">TRUCK-11</td>
+                <td>06 Jul 2026</td>
+                <td>110 L</td>
+                <td class="text-right mono">8,400.00</td>
+              </tr>
+              <tr>
+                <td class="font-bold">MINI-08</td>
+                <td>06 Jul 2026</td>
+                <td>28 L</td>
+                <td class="text-right mono">2,050.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="bento-section">
+        <div class="bento-header">
+          <div class="bento-title-wrap">
+            <div class="bento-accent-bar amber"></div>
+            <h3>OTHER EXPENSES (TOLL / MISC)</h3>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="expense-table" id="other-expenses-table">
+            <thead>
+              <tr>
+                <th>TRIP</th>
+                <th>VEHICLE</th>
+                <th>TOLL</th>
+                <th>OTHER</th>
+                <th>MAINT. (LINKED)</th>
+                <th class="text-right">TOTAL ($)</th>
+                <th class="text-center">STATUS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-bold">TR001</td>
+                <td>VAN-05</td>
+                <td class="mono">120.00</td>
+                <td class="mono">0.00</td>
+                <td class="mono">0.00</td>
+                <td class="text-right mono font-bold">120.00</td>
+                <td class="text-center"><span class="expense-badge available">AVAILABLE</span></td>
+              </tr>
+              <tr>
+                <td class="font-bold">TR002</td>
+                <td>TRK-12</td>
+                <td class="mono">340.00</td>
+                <td class="mono">150.00</td>
+                <td class="mono">18,000.00</td>
+                <td class="text-right mono font-bold secondary-color">18,490.00</td>
+                <td class="text-center"><span class="expense-badge completed">COMPLETED</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="operational-summary-footer">
+        <div class="total-cost-banner">
+          <div class="banner-left">
+            <div class="banner-icon">
+              <span class="material-symbols-outlined">calculate</span>
+            </div>
+            <div class="banner-title">
+              <h4>TOTAL OPERATIONAL COST (AUTO)</h4>
+              <p>Calculated formula: FUEL + MAINTENANCE + LOGISTICS</p>
+            </div>
+          </div>
+          <div class="banner-right">
+            <span>USD</span>
+            <span id="total-cost-val">34,070.00</span>
+          </div>
+        </div>
+
+        <div class="bottom-metrics-row">
+          <div class="metric-card">
+            <div class="metric-info">
+              <p>Efficiency Rating</p>
+              <p id="efficiency-val">94.2%</p>
+            </div>
+            <span class="material-symbols-outlined secondary-color">verified</span>
+          </div>
+          <div class="metric-card">
+            <div class="metric-info">
+              <p>Unlogged Spend</p>
+              <p class="error-color" id="unlogged-val">$0.00</p>
+            </div>
+            <span class="material-symbols-outlined">task_alt</span>
+          </div>
+          <div class="metric-card">
+            <div class="metric-info">
+              <p>Next Audit</p>
+              <p>12 Oct</p>
+            </div>
+            <span class="material-symbols-outlined">event</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="../JS/fuelExpense.js"></script>
+</body>
+</html>
