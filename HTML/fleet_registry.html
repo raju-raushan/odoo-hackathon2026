@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fleet Registry | TransitOps</title>
+  <meta name="description" content="Manage and monitor active vehicles, capacities, odometer data, and scheduled maintenance across global routes."/>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet"/>
+  <link rel="stylesheet" href="../CSS/fleetRegistry.css"/>
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <h1>TransitOps</h1>
+      <p>Smart Fleet Management</p>
+    </div>
+    <nav>
+      <a class="nav-item" href="#"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
+      <a class="nav-item active" href="fleet_registry.html"><span class="material-symbols-outlined">local_shipping</span>Fleet</a>
+      <a class="nav-item" href="#"><span class="material-symbols-outlined">person</span>Drivers</a>
+      <a class="nav-item" href="trip_dispatcher.html"><span class="material-symbols-outlined">route</span>Trips</a>
+      <a class="nav-item" href="#"><span class="material-symbols-outlined">build</span>Maintenance</a>
+      <a class="nav-item" href="#"><span class="material-symbols-outlined">local_gas_station</span>Fuel &amp; Expenses</a>
+      <a class="nav-item" href="#"><span class="material-symbols-outlined">analytics</span>Analytics</a>
+      <a class="nav-item" href="profile.html"><span class="material-symbols-outlined">settings</span>Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="nav-item" href="#"><span class="material-symbols-outlined">contact_support</span>Support</a>
+      <a class="nav-item" href="signUp.html"><span class="material-symbols-outlined">logout</span>Log Out</a>
+    </div>
+  </aside>
+
+  <!-- Main Content Wrapper -->
+  <div class="main-wrap">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="search-box">
+        <span class="material-symbols-outlined">search</span>
+        <input type="text" placeholder="Search fleet registry..." id="search-input"/>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-icons">
+          <button aria-label="Notifications">
+            <span class="material-symbols-outlined">notifications</span>
+            <span class="badge"></span>
+          </button>
+          <button aria-label="Help">
+            <span class="material-symbols-outlined">help</span>
+          </button>
+        </div>
+        <div class="user-info">
+          <div class="text">
+            <p class="name">Raven K.</p>
+            <p class="role">Dispatcher</p>
+          </div>
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdWajQLB_ew4YzDe0V062MDVoOC13-cztnAZtlkjYFhiYzHFJFEykEC4yiHdRhjt9Rwn0rW3sN5GwUE8Gk5ZakFDk3SEYOdyDBHaiEBb2tXzIkXa97EHWMybJuNLU2xD_QtgwuX6yt1yfBIiGcDRQIaatsC_G0PkHv1UZQ0SNL6OhwTfUay4ZRTHtaxFB826m12YtwObUj0HNQ2e3Zfu8lygiBx_Fw-IWSEY-agVbyBgrageNbXQeL1A" alt="Raven K."/>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content Area -->
+    <main class="content-area">
+      <div style="max-width:1440px; margin:0 auto">
+        
+        <!-- Page Header -->
+        <div class="page-header">
+          <div>
+            <h1>Fleet Registry</h1>
+            <p>Manage and monitor your 42 active vehicles across global routes.</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-secondary" id="filter-btn">
+              <span class="material-symbols-outlined">filter_list</span> Filter
+            </button>
+            <button class="btn btn-primary" id="add-vehicle-btn">
+              <span class="material-symbols-outlined">add</span> + Add Vehicle
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats Bento Grid -->
+        <div class="bento-stats">
+          <div class="stat-card indigo">
+            <div class="header">
+              <div>
+                <p class="title">Active Fleet</p>
+                <h3>38</h3>
+              </div>
+              <div class="icon-box">
+                <span class="material-symbols-outlined">local_shipping</span>
+              </div>
+            </div>
+            <div class="footer trend-up">
+              <span class="material-symbols-outlined">trending_up</span>
+              <span>+4.2% from last month</span>
+            </div>
+          </div>
+
+          <div class="stat-card green">
+            <div class="header">
+              <div>
+                <p class="title">Available</p>
+                <h3>12</h3>
+              </div>
+              <div class="icon-box">
+                <span class="material-symbols-outlined">check_circle</span>
+              </div>
+            </div>
+            <div class="footer desc">
+              <span>Ready for immediate dispatch</span>
+            </div>
+          </div>
+
+          <div class="stat-card orange">
+            <div class="header">
+              <div>
+                <p class="title">In Maintenance</p>
+                <h3>06</h3>
+              </div>
+              <div class="icon-box">
+                <span class="material-symbols-outlined">build</span>
+              </div>
+            </div>
+            <div class="footer trend-warning">
+              <span class="material-symbols-outlined">warning</span>
+              <span>2 overdue services</span>
+            </div>
+          </div>
+
+          <div class="stat-card slate">
+            <div class="header">
+              <div>
+                <p class="title">Avg Utilization</p>
+                <h3>84%</h3>
+              </div>
+              <div class="icon-box">
+                <span class="material-symbols-outlined">speed</span>
+              </div>
+            </div>
+            <div class="footer desc">
+              <span>Optimal range: 75-90%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vehicle List Table -->
+        <div class="table-card">
+          <div class="table-header">
+            <h2>Vehicle List</h2>
+            <div class="table-controls">
+              <span>Show</span>
+              <select>
+                <option>10</option>
+                <option selected>25</option>
+                <option>50</option>
+              </select>
+              <span>entries</span>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Reg. Number</th>
+                  <th>Name/Model</th>
+                  <th>Type</th>
+                  <th>Capacity</th>
+                  <th>Odometer</th>
+                  <th>Acquisition Cost</th>
+                  <th>Status</th>
+                  <th style="text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-row">
+                  <td class="reg-number">TX-402-B</td>
+                  <td>Ford Transit 350</td>
+                  <td>Van</td>
+                  <td>1 Ton</td>
+                  <td>42,502 km</td>
+                  <td>$34,200.00</td>
+                  <td><span class="status-pill available">Available</span></td>
+                  <td style="text-align: right;">
+                    <button class="btn-icon" aria-label="More Options">
+                      <span class="material-symbols-outlined">more_vert</span>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="table-row">
+                  <td class="reg-number">HV-991-L</td>
+                  <td>Mercedes-Benz Actros</td>
+                  <td>Truck</td>
+                  <td>5 Ton</td>
+                  <td>112,890 km</td>
+                  <td>$145,000.00</td>
+                  <td><span class="status-pill on-trip">On Trip</span></td>
+                  <td style="text-align: right;">
+                    <button class="btn-icon" aria-label="More Options">
+                      <span class="material-symbols-outlined">more_vert</span>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="table-row">
+                  <td class="reg-number">MV-212-A</td>
+                  <td>Volkswagen Caddy</td>
+                  <td>Mini</td>
+                  <td>500 kg</td>
+                  <td>15,400 km</td>
+                  <td>$28,500.00</td>
+                  <td><span class="status-pill in-shop">In Shop</span></td>
+                  <td style="text-align: right;">
+                    <button class="btn-icon" aria-label="More Options">
+                      <span class="material-symbols-outlined">more_vert</span>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="table-row">
+                  <td class="reg-number">TX-105-X</td>
+                  <td>Isuzu NPR 400</td>
+                  <td>Truck</td>
+                  <td>1 Ton</td>
+                  <td>452,010 km</td>
+                  <td>$41,000.00</td>
+                  <td><span class="status-pill retired">Retired</span></td>
+                  <td style="text-align: right;">
+                    <button class="btn-icon" aria-label="More Options">
+                      <span class="material-symbols-outlined">more_vert</span>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="table-row">
+                  <td class="reg-number">HV-223-K</td>
+                  <td>Scania R450</td>
+                  <td>Truck</td>
+                  <td>5 Ton</td>
+                  <td>68,120 km</td>
+                  <td>$158,200.00</td>
+                  <td><span class="status-pill available">Available</span></td>
+                  <td style="text-align: right;">
+                    <button class="btn-icon" aria-label="More Options">
+                      <span class="material-symbols-outlined">more_vert</span>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="table-row">
+                  <td class="reg-number">TX-808-M</td>
+                  <td>Renault Master L3H2</td>
+                  <td>Van</td>
+                  <td>1 Ton</td>
+                  <td>24,300 km</td>
+                  <td>$31,900.00</td>
+                  <td><span class="status-pill on-trip">On Trip</span></td>
+                  <td style="text-align: right;">
+                    <button class="btn-icon" aria-label="More Options">
+                      <span class="material-symbols-outlined">more_vert</span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination">
+            <span class="pagination-text">Showing 1 to 6 of 42 entries</span>
+            <div class="pagination-buttons">
+              <button class="pagination-btn" disabled aria-label="Previous Page">
+                <span class="material-symbols-outlined">chevron_left</span>
+              </button>
+              <button class="pagination-btn active">1</button>
+              <button class="pagination-btn">2</button>
+              <button class="pagination-btn">3</button>
+              <button class="pagination-btn" aria-label="Next Page">
+                <span class="material-symbols-outlined">chevron_right</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map & Forecast Section -->
+        <div class="bottom-grid">
+          <!-- Geographic Distribution Map -->
+          <div class="map-card">
+            <div class="map-header">
+              <h3>Fleet Geographic Distribution</h3>
+              <div class="indicator">
+                <span></span>
+                <span>In Motion</span>
+              </div>
+            </div>
+            <div class="map-viewport">
+              <div class="map-background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAQtYnFadaZwy7wMaZA9ra61y2fIlyOZE42lvrEqItl9uJ8E1GrwBVUgZnGtw2UADB0RaQ0jjiFivptiq8AONZBSDzrf2PmYLt3OYpN-3R0Jf9Xw72kJ-3lSn2KFFQCcm2UmKw-KyiXIMXJPgG8ZCBw8r-ykltxlXjoStYGfbOfmUhYcmw9r3QPHZV0_OhuAGwXFZsM4ApZuNGwZHGRQBCGyqZg_9Jjtu3MEavXbLC1JQ9ImPU4JWODYw')"></div>
+              <div class="map-overlay">
+                <div class="map-overlay-item">
+                  <span class="dot"></span>
+                  <span>HV-991-L: En route to Ohio</span>
+                </div>
+                <div class="map-overlay-item">
+                  <span class="dot"></span>
+                  <span>TX-808-M: City Delivery</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Forecast Alert -->
+          <div class="forecast-card">
+            <div>
+              <p class="card-label">Maintenance Alert</p>
+              <h3>Service Forecast</h3>
+              <p>3 heavy trucks are approaching the 120,000 km threshold. We recommend scheduling maintenance this week.</p>
+              <div class="forecast-list">
+                <div class="forecast-item">
+                  <span>HV-223-K</span>
+                  <span>8 days left</span>
+                </div>
+                <div class="forecast-item">
+                  <span>HV-102-C</span>
+                  <span>12 days left</span>
+                </div>
+              </div>
+            </div>
+            <button class="btn-forecast" id="schedule-all-btn">Schedule All</button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Floating Action Button -->
+  <button class="fab" id="fab-add-btn" aria-label="Add Vehicle">
+    <span class="material-symbols-outlined">add</span>
+  </button>
+
+  <script src="../JS/fleetRegistry.js"></script>
+</body>
+</html>

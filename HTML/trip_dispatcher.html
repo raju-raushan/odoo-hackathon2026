@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trip Dispatcher | TransitOps</title>
+  <meta name="description" content="Dispatch new transit operations, view live corridor metrics, route progress, and network health uptime."/>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet"/>
+  <link rel="stylesheet" href="../CSS/tripDispatcher.css"/>
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <h1>TransitOps</h1>
+      <p>Smart Fleet Management</p>
+    </div>
+    <nav>
+      <a class="nav-item" href="#"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
+      <a class="nav-item" href="fleet_registry.html"><span class="material-symbols-outlined">local_shipping</span>Fleet</a>
+      <a class="nav-item" href="#"><span class="material-symbols-outlined">person</span>Drivers</a>
+      <a class="nav-item active" href="trip_dispatcher.html"><span class="material-symbols-outlined">route</span>Trips</a>
+      <a class="nav-item" href="#"><span class="material-symbols-outlined">build</span>Maintenance</a>
+      <a class="nav-item" href="#"><span class="material-symbols-outlined">local_gas_station</span>Fuel &amp; Expenses</a>
+      <a class="nav-item" href="#"><span class="material-symbols-outlined">analytics</span>Analytics</a>
+      <a class="nav-item" href="profile.html"><span class="material-symbols-outlined">settings</span>Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="nav-item" href="#"><span class="material-symbols-outlined">contact_support</span>Support</a>
+      <a class="nav-item" href="signUp.html"><span class="material-symbols-outlined">logout</span>Log Out</a>
+    </div>
+  </aside>
+
+  <!-- Main Content Wrapper -->
+  <div class="main-wrap">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="search-box">
+        <span class="material-symbols-outlined">search</span>
+        <input type="text" placeholder="Search trips, units, or drivers..." id="search-input"/>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-icons">
+          <button aria-label="Notifications">
+            <span class="material-symbols-outlined">notifications</span>
+            <span class="badge"></span>
+          </button>
+          <button aria-label="Help">
+            <span class="material-symbols-outlined">help</span>
+          </button>
+        </div>
+        <div class="user-info">
+          <div class="text">
+            <p class="name">Raven K.</p>
+            <p class="role">Dispatcher</p>
+          </div>
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs5URkYHwLmlt9vCIH_GjXjVUkZ30cZCTi6TBoNGKCGY1xBbzJ6hUJ47wsQ-foFXixZb4n0sVEvZeZoQzWHuCo90swLPggRO4BUsvvL7CgP6i6Xq-g9rMXCwFOky9UozmfUwHxWLNfmohfc1dN3E6-E9ojidUZ_NKS4kD8PV4wO_13CM_-uuXwLRxYrRJB4tbtTtTghiTweFN2dew_k4ABVZLYgM8OuZWP1-k-DaokKHlXo9hWBdNT8g" alt="Raven K."/>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content Area -->
+    <main class="content-area">
+      <div style="max-width:1440px; margin:0 auto">
+        
+        <!-- Page Header -->
+        <div class="page-header">
+          <div>
+            <h2>Trip Dispatch Center</h2>
+            <div class="header-status">
+              <span class="status-indicator">
+                <span class="material-symbols-outlined" style="font-size:16px">schedule</span>
+                <span>Last updated: 14:32:01</span>
+              </span>
+              <span class="status-indicator live">
+                <span class="dot"></span>
+                <span>Live Stream Active</span>
+              </span>
+            </div>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-secondary">
+              <span class="material-symbols-outlined" style="font-size: 18px;">file_download</span> Export
+            </button>
+            <button class="btn btn-primary">
+              <span class="material-symbols-outlined" style="font-size: 18px;">add</span> Create Batch
+            </button>
+          </div>
+        </div>
+
+        <!-- Bento Grid Layout -->
+        <div class="bento-grid">
+          
+          <!-- Column 4: Dispatch New Trip Form -->
+          <section class="col-span-4">
+            <div class="form-card">
+              <div class="form-card-header">
+                <h3>Dispatch New Trip</h3>
+              </div>
+              <form class="form-body" id="dispatchForm">
+                <div class="form-row-2">
+                  <div class="field">
+                    <label>Source</label>
+                    <div class="input-wrap">
+                      <span class="material-symbols-outlined">location_on</span>
+                      <input class="pl-8" type="text" value="Warehouse A-12" required/>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label>Destination</label>
+                    <div class="input-wrap">
+                      <span class="material-symbols-outlined">flag</span>
+                      <input class="pl-8" type="text" placeholder="Enter port/hub" required/>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label>Vehicle Selection</label>
+                  <select id="vehicleSelector">
+                    <option value="15000">Heavy Duty Hauler (Cap: 15,000kg)</option>
+                    <option value="8000">Medium Transit Van (Cap: 8,000kg)</option>
+                    <option value="25000">Freight Liner XL (Cap: 25,000kg)</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label>Driver</label>
+                  <div class="driver-card">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-UD_j5SQWU75rAqzYRk38dONjVYWh6S0TJWjTUWbSsqgvCYjj2Wvkc8gLbdOKUmx-9f_WsLOJghvvUC3edEq0v5QU3tfZ7NpEmDgygnlVBWoUJJpekeg6fPKRWrBO5YZjwbZZBWj43hjYP8N0Vb4NOYbboVwqOc_lG4mWwfpyBauwfncLvo8gS8MsEAc-OJys9KggixUEWs_OzBavtfT5wIsrlZ3Dd-hCLYJJIejbzVtDe18AoFXNEA" alt="Marcus Thorne"/>
+                    <div class="driver-info">
+                      <p>Marcus Thorne</p>
+                      <p>Badge: #9921 • Available</p>
+                    </div>
+                    <button type="button" aria-label="Change Driver">
+                      <span class="material-symbols-outlined">swap_horiz</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <div class="weight-indicator">
+                    <label>Cargo Weight (kg)</label>
+                    <span id="capacityIndicator">0 / 15,000kg</span>
+                  </div>
+                  <input type="number" id="cargoWeight" value="12500" required/>
+                  
+                  <div class="warning-box hidden" id="weightWarning">
+                    <span class="material-symbols-outlined">warning</span>
+                    <p>Cargo exceeds vehicle maximum capacity!</p>
+                  </div>
+                </div>
+
+                <!-- Stepper -->
+                <div class="stepper-section">
+                  <h4>Lifecycle State</h4>
+                  <div class="stepper">
+                    <div class="line"></div>
+                    <div class="step active">
+                      <div class="circle">1</div>
+                      <span>Draft</span>
+                    </div>
+                    <div class="step disabled">
+                      <div class="circle">2</div>
+                      <span>Dispatch</span>
+                    </div>
+                    <div class="step disabled">
+                      <div class="circle">3</div>
+                      <span>Arrived</span>
+                    </div>
+                    <div class="step disabled">
+                      <div class="circle">4</div>
+                      <span>Complete</span>
+                    </div>
+                  </div>
+                </div>
+
+                <button class="btn-submit" type="submit">Confirm Dispatch</button>
+              </form>
+            </div>
+          </section>
+
+          <!-- Column 8: Live Board Tracking & Preview Map -->
+          <section class="col-span-8">
+            <div class="live-board-card">
+              <div class="live-board-header">
+                <h3>Live Board <span class="badge" id="active-trips-count">3 Active</span></h3>
+                <div class="controls">
+                  <button class="controls-btn">
+                    <span class="material-symbols-outlined">filter_list</span> Filter Status
+                  </button>
+                  <button class="controls-btn">
+                    <span class="material-symbols-outlined">sort</span> Priority
+                  </button>
+                </div>
+              </div>
+
+              <div class="table-responsive custom-scrollbar">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Trip ID</th>
+                      <th>Asset &amp; Driver</th>
+                      <th>Route Status</th>
+                      <th style="text-align: right;">ETA / Progress</th>
+                      <th style="text-align: right;">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="table-row">
+                      <td class="p-lg">
+                        <div class="trip-id-cell">
+                          <div class="indicator-line"></div>
+                          <div>
+                            <p class="id-text">TR001</p>
+                            <p class="class-text">Class: Priority</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="p-lg">
+                        <div class="asset-cell">
+                          <div class="icon-box">
+                            <span class="material-symbols-outlined text-primary">local_shipping</span>
+                          </div>
+                          <div>
+                            <p class="name">Unit 4492</p>
+                            <p class="driver">Sarah Jenkins</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="p-lg">
+                        <div class="status-wrap">
+                          <div class="status-pill in-transit">
+                            <span class="kinetic-pulse" style="width: 6px; height: 6px; background-color: #2e7d32; border-radius: 50%;"></span>
+                            In Transit
+                          </div>
+                          <p class="route-info">Chicago Hub → Indy Port</p>
+                        </div>
+                      </td>
+                      <td class="p-lg text-right">
+                        <div class="progress-wrap">
+                          <div class="progress-header">
+                            <span>78%</span>
+                            <span>14m left</span>
+                          </div>
+                          <div class="progress-bar-bg">
+                            <div class="progress-bar-fg" style="width: 78%"></div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="p-lg text-right">
+                        <button class="btn-action-table" aria-label="More Options">
+                          <span class="material-symbols-outlined">more_vert</span>
+                        </button>
+                      </td>
+                    </tr>
+
+                    <tr class="table-row">
+                      <td class="p-lg">
+                        <div class="trip-id-cell regular">
+                          <div class="indicator-line"></div>
+                          <div>
+                            <p class="id-text">TR004</p>
+                            <p class="class-text">Class: Regular</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="p-lg">
+                        <div class="asset-cell">
+                          <div class="icon-box">
+                            <span class="material-symbols-outlined text-primary">local_shipping</span>
+                          </div>
+                          <div>
+                            <p class="name">Unit 2110</p>
+                            <p class="driver">David Wu</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="p-lg">
+                        <div class="status-wrap">
+                          <div class="status-pill dispatched">
+                            Dispatched
+                          </div>
+                          <p class="route-info">Denver Center → SLC Hub</p>
+                        </div>
+                      </td>
+                      <td class="p-lg text-right">
+                        <div class="progress-wrap">
+                          <div class="progress-header">
+                            <span>12%</span>
+                            <span>4h 22m</span>
+                          </div>
+                          <div class="progress-bar-bg">
+                            <div class="progress-bar-fg" style="width: 12%"></div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="p-lg text-right">
+                        <button class="btn-action-table" aria-label="More Options">
+                          <span class="material-symbols-outlined">more_vert</span>
+                        </button>
+                      </td>
+                    </tr>
+
+                    <tr class="table-row delayed-border">
+                      <td class="p-lg">
+                        <div class="trip-id-cell rush">
+                          <div class="indicator-line"></div>
+                          <div>
+                            <p class="id-text">TR006</p>
+                            <p class="class-text">Class: Rush</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="p-lg">
+                        <div class="asset-cell delayed">
+                          <div class="icon-box">
+                            <span class="material-symbols-outlined">warning</span>
+                          </div>
+                          <div>
+                            <p class="name">Unit 8820</p>
+                            <p class="driver">Elena Rossi</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="p-lg">
+                        <div class="status-wrap">
+                          <div class="status-pill delayed">
+                            Delayed
+                          </div>
+                          <p class="route-info">Weather Delay: I-80 West</p>
+                        </div>
+                      </td>
+                      <td class="p-lg text-right">
+                        <div class="progress-delayed">
+                          <p>STALLED</p>
+                          <p>ETA: Unknown</p>
+                        </div>
+                      </td>
+                      <td class="p-lg text-right">
+                        <button class="btn-action-table error-hover" aria-label="Emergency Share">
+                          <span class="material-symbols-outlined">emergency_share</span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Map Preview Panel -->
+              <div class="map-preview-panel">
+                <div class="map-img" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuArGJvaQuETU55IQ_F8h6LS_wQ2S-h9YFrwY0WeODalAsWrPQ7_OuctBSjGekMSgYDRBqpyV9FxTrsKKjLXjh1uq0JS99QT8iIgfl986pqtpA4oW5ZtYziXgU3Bg73cNy6l-kEyAd97PRzOuErTnZESdVwRBNHKYlXbKo9SYHzzpQIr8w9Ow32ePydwz5NG_eRW_aEvhk6F-K3yh_5JrhfJnW2D8LlYDIoWfp7wzrlbieL3SsEzDbsUDA')"></div>
+                <div class="overlay"></div>
+                <div class="map-preview-content">
+                  <p class="header-label">Network Health</p>
+                  <h4>Central Corridor Operations</h4>
+                  <div class="stats">
+                    <div class="stat-item">
+                      <p>94%</p>
+                      <p>Uptime</p>
+                    </div>
+                    <div class="stat-item">
+                      <p>3.2m</p>
+                      <p>Avg Lag</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+        </div>
+
+        <!-- Footer Summary Cluster -->
+        <div class="footer-widgets">
+          <div class="widget-card">
+            <div class="icon-circle primary">
+              <span class="material-symbols-outlined">check_circle</span>
+            </div>
+            <div class="text-content">
+              <p>Completed (24h)</p>
+              <p>112 Trips</p>
+            </div>
+          </div>
+
+          <div class="widget-card">
+            <div class="icon-circle secondary">
+              <span class="material-symbols-outlined">speed</span>
+            </div>
+            <div class="text-content">
+              <p>Avg Cycle Time</p>
+              <p>4h 12m</p>
+            </div>
+          </div>
+
+          <div class="widget-card">
+            <div class="icon-circle orange">
+              <span class="material-symbols-outlined">warning</span>
+            </div>
+            <div class="text-content">
+              <p>Incidents</p>
+              <p>2 Open</p>
+            </div>
+          </div>
+
+          <div class="widget-card">
+            <div class="icon-circle green">
+              <span class="material-symbols-outlined">savings</span>
+            </div>
+            <div class="text-content">
+              <p>Fuel Efficiency</p>
+              <p>+12.4%</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../JS/tripDispatcher.js"></script>
+</body>
+</html>
