@@ -84,4 +84,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  const notifBtn = document.getElementById('notif-btn');
+  if (notifBtn) {
+    notifBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.location.href = 'notifications.html';
+    });
+  }
 });

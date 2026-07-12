@@ -110,3 +110,11 @@ if (trendBtn) {
     alert("Historical Analytics window is loading...");
   });
 }
+
+var notifBtn = document.getElementById('notif-btn');
+if (notifBtn) {
+  notifBtn.addEventListener('click', function () {
+    window.location.href = 'notifications.html';
+  });
+}
+

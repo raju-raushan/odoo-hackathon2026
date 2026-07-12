@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Performance Overview | TransitFlow</title>
+<meta name="description" content="TransitFlow logistics and fleet performance analytics — track total revenue, utilization, trip duration, cost breakdown, and driver efficiency."/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet"/>
+<link rel="stylesheet" href="../CSS/analytics.css"/>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-icon-box">
+      <span class="material-symbols-outlined">local_shipping</span>
+    </div>
+    <h1>MetroTransit</h1>
+    <p>CENTRAL HUB</p>
+  </div>
+  <nav>
+    <a class="nav-item active" href="analytics.html" id="nav-analytics"><span class="material-symbols-outlined">analytics</span>Analytics</a>
+    <a class="nav-item" href="fleet_registry.html" id="nav-fleet"><span class="material-symbols-outlined">local_shipping</span>Fleet</a>
+    <a class="nav-item" href="drivers.html" id="nav-drivers"><span class="material-symbols-outlined">person</span>Drivers</a>
+    <a class="nav-item" href="maintenance.html" id="nav-maintenance"><span class="material-symbols-outlined">build</span>Maintenance</a>
+    <a class="nav-item" href="fuelExpense.html" id="nav-financials"><span class="material-symbols-outlined">payments</span>Financials</a>
+  </nav>
+  <div class="sidebar-btn-wrap">
+    <button class="btn-sidebar-dispatch" id="dispatch-view-btn">Dispatch View</button>
+  </div>
+  <div class="sidebar-footer">
+    <a class="nav-item" href="profile.html" id="nav-settings"><span class="material-symbols-outlined">settings</span>Settings</a>
+    <a class="nav-item" href="signUp.html"><span class="material-symbols-outlined">logout</span>Log Out</a>
+  </div>
+</aside>
+
+<div class="main-wrap">
+  <header class="topbar">
+    <div class="topbar-left">
+      <h2>TransitFlow</h2>
+      <div class="search-box">
+        <span class="material-symbols-outlined">search</span>
+        <input type="text" placeholder="Search analytics..." id="search-input"/>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-icons">
+        <button id="notif-btn">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="notif-badge"></span>
+        </button>
+        <button><span class="material-symbols-outlined">help</span></button>
+      </div>
+      <a href="#" class="link-support">Support</a>
+      <button class="btn-new-report" id="new-report-btn">New Report</button>
+      <div class="user-info" id="user-profile-menu">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfu9tzfpkC0xSjNwC2YtTd9AQzwvfM8bE4jYH9wHZsmhZVwDTJQxZI3CdVlKSIqS6n8ZQVrWEnqXC6W4u0sFEvjQKxElfppQWbr-e4HuvwOjJ4-u_8NK0V38icwGYLJjRGymTYK3kAIlBHKCfN9IccSX3nYF6rfH0lbCmiEgGYgLapSXxYGM4WXN4j0ihjLWCFNOCKZp9alk2FxOJB12tJKqaoLL7FVryxGlqNLmsZzyj_gUo3x5vpWw" alt="User Profile"/>
+      </div>
+    </div>
+  </header>
+
+  <main class="content-area">
+    <div class="content-container">
+      <div class="page-header">
+        <div class="page-title">
+          <h2>Performance Overview</h2>
+          <p>Real-time logistics and utilization metrics.</p>
+        </div>
+        <div class="header-actions">
+          <select class="select-range" id="time-range-select">
+            <option>Last 30 Days</option>
+            <option>Last 7 Days</option>
+            <option>Today</option>
+          </select>
+          <button class="btn-filter-icon" id="filter-btn">
+            <span class="material-symbols-outlined">filter_list</span>
+          </button>
+        </div>
+      </div>
+
+      <section class="metrics-row">
+        <div class="metric-card revenue">
+          <div class="card-header-row">
+            <div class="icon-box">
+              <span class="material-symbols-outlined">payments</span>
+            </div>
+            <div class="trend-badge up">
+              <span class="material-symbols-outlined">arrow_upward</span>
+              <span>12.4%</span>
+            </div>
+          </div>
+          <h3>Total Revenue</h3>
+          <p class="metric-val">$1,284,500</p>
+        </div>
+
+        <div class="metric-card utilization">
+          <div class="card-header-row">
+            <div class="icon-box">
+              <span class="material-symbols-outlined">bar_chart</span>
+            </div>
+            <div class="trend-badge down">
+              <span class="material-symbols-outlined">arrow_downward</span>
+              <span>2.1%</span>
+            </div>
+          </div>
+          <h3>Fleet Utilization</h3>
+          <p class="metric-val">94.2%</p>
+        </div>
+
+        <div class="metric-card duration">
+          <div class="card-header-row">
+            <div class="icon-box">
+              <span class="material-symbols-outlined">schedule</span>
+            </div>
+            <span class="status-tag stable">Stable</span>
+          </div>
+          <h3>Avg. Trip Duration</h3>
+          <p class="metric-val">42m 15s</p>
+        </div>
+
+        <div class="metric-card maint">
+          <div class="card-header-row">
+            <div class="icon-box">
+              <span class="material-symbols-outlined">build</span>
+            </div>
+            <span class="status-tag caution">Caution</span>
+          </div>
+          <h3>Active Maintenance</h3>
+          <p class="metric-val">5.8%</p>
+        </div>
+      </section>
+
+      <section class="grid-2-col">
+        <div class="chart-card">
+          <div class="chart-header-row">
+            <div class="chart-title-wrap">
+              <h3>Trip Volume</h3>
+              <p>Total completed trips per day over the last month.</p>
+            </div>
+            <div class="toggle-group">
+              <button class="toggle-btn active" id="toggle-line">Line</button>
+              <button class="toggle-btn" id="toggle-area">Area</button>
+            </div>
+          </div>
+          <div class="line-chart-viewport">
+            <svg class="line-chart-svg" viewBox="0 0 500 240" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="chart-area-grad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="var(--secondary)" stop-opacity="0.25"/>
+                  <stop offset="100%" stop-color="var(--secondary)" stop-opacity="0.0"/>
+                </linearGradient>
+              </defs>
+              <g stroke="var(--outline-variant)" stroke-width="0.5" stroke-dasharray="4,4">
+                <line x1="0" y1="40" x2="500" y2="40"/>
+                <line x1="0" y1="100" x2="500" y2="100"/>
+                <line x1="0" y1="160" x2="500" y2="160"/>
+              </g>
+              <path id="area-fill-path" d="M 0 200 L 0 160 Q 60 170 120 165 T 240 140 T 360 160 T 480 110 L 500 100 L 500 220 L 0 220 Z" fill="url(#chart-area-grad)"/>
+              <path id="line-curve-path" d="M 0 160 Q 60 170 120 165 T 240 140 T 360 160 T 480 110 L 500 100" fill="none" stroke="var(--secondary)" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="120" cy="165" r="4" fill="var(--secondary)"/>
+              <circle cx="240" cy="140" r="4" fill="var(--secondary)"/>
+              <circle cx="360" cy="160" r="4" fill="var(--secondary)"/>
+              <circle cx="480" cy="110" r="4" fill="var(--secondary)"/>
+            </svg>
+          </div>
+          <div class="chart-axis-x">
+            <span>May 01</span>
+            <span>May 10</span>
+            <span>May 20</span>
+            <span>May 30</span>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-header-row">
+            <div class="chart-title-wrap">
+              <h3>Cost Breakdown</h3>
+            </div>
+          </div>
+          <div class="donut-chart-wrap">
+            <svg width="150" height="150" viewBox="0 0 42 42">
+              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--surface-container-high)" stroke-width="4.2"/>
+              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--secondary)" stroke-width="4.2" stroke-dasharray="40 60" stroke-dashoffset="25"/>
+              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#ffb95f" stroke-width="4.2" stroke-dasharray="25 75" stroke-dashoffset="85"/>
+              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--primary)" stroke-width="4.2" stroke-dasharray="20 80" stroke-dashoffset="60"/>
+              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--secondary-fixed-dim)" stroke-width="4.2" stroke-dasharray="15 85" stroke-dashoffset="40"/>
+            </svg>
+            <div class="donut-inner-text">
+              <span>Total Ops</span>
+              <span>$412k</span>
+            </div>
+          </div>
+          <div class="donut-legend">
+            <div class="legend-row">
+              <div class="legend-left">
+                <div class="legend-dot fuel"></div>
+                <span class="legend-name">Fuel</span>
+              </div>
+              <span class="legend-value">40%</span>
+            </div>
+            <div class="legend-row">
+              <div class="legend-left">
+                <div class="legend-dot maint"></div>
+                <span class="legend-name">Maintenance</span>
+              </div>
+              <span class="legend-value">25%</span>
+            </div>
+            <div class="legend-row">
+              <div class="legend-left">
+                <div class="legend-dot wages"></div>
+                <span class="legend-name">Driver Wages</span>
+              </div>
+              <span class="legend-value">20%</span>
+            </div>
+            <div class="legend-row">
+              <div class="legend-left">
+                <div class="legend-dot tolls"></div>
+                <span class="legend-name">Tolls &amp; Other</span>
+              </div>
+              <span class="legend-value">15%</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="equal-2-col">
+        <div class="drivers-list">
+          <div class="drivers-list-header">
+            <h4>Top Fleet Drivers</h4>
+            <a href="drivers.html" id="view-drivers-link">View All</a>
+          </div>
+          <div class="driver-table-headers">
+            <span>Driver</span>
+            <span>Efficiency</span>
+            <span>Rating</span>
+          </div>
+          <div class="driver-list-row">
+            <div class="driver-profile-cell">
+              <div class="driver-avatar-placeholder">AS</div>
+              <div class="driver-name-wrap">
+                <p>Aaron Smith</p>
+                <p>Route: Sector 4-B</p>
+              </div>
+            </div>
+            <span class="driver-eff-val">98.4%</span>
+            <div class="driver-stars">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+            </div>
+          </div>
+          <div class="driver-list-row">
+            <div class="driver-profile-cell">
+              <div class="driver-avatar-placeholder">JR</div>
+              <div class="driver-name-wrap">
+                <p>Jada Rivers</p>
+                <p>Route: Express West</p>
+              </div>
+            </div>
+            <span class="driver-eff-val">97.1%</span>
+            <div class="driver-stars">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+            </div>
+          </div>
+          <div class="driver-list-row">
+            <div class="driver-profile-cell">
+              <div class="driver-avatar-placeholder">BK</div>
+              <div class="driver-name-wrap">
+                <p>Ben Knight</p>
+                <p>Route: Downtown Circle</p>
+              </div>
+            </div>
+            <span class="driver-eff-val">96.8%</span>
+            <div class="driver-stars">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">star</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="heatmap-card">
+          <div class="heatmap-header">
+            <h4>Density Heatmap</h4>
+            <p>Regional Trip Frequency</p>
+          </div>
+          <div class="heatmap-controls">
+            <button class="heatmap-ctrl-btn" id="map-zoom-in"><span class="material-symbols-outlined">add</span></button>
+            <button class="heatmap-ctrl-btn" id="map-zoom-out"><span class="material-symbols-outlined">remove</span></button>
+            <button class="heatmap-ctrl-btn" id="map-locate"><span class="material-symbols-outlined">my_location</span></button>
+          </div>
+          <div class="heatmap-viewport" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAQtYnFadaZwy7wMaZA9ra61y2fIlyOZE42lvrEqItl9uJ8E1GrwBVUgZnGtw2UADB0RaQ0jjiFivptiq8AONZBSDzrf2PmYLt3OYpN-3R0Jf9Xw72kJ-3lSn2KFFQCcm2UmKw-KyiXIMXJPgG8ZCBw8r-ykltxlXjoStYGfbOfmUhYcmw9r3QPHZV0_OhuAGwXFZsM4ApZuNGwZHGRQBCGyqZg_9Jjtu3MEavXbLC1JQ9ImPU4JWODYw')"></div>
+          <div class="heatmap-summary-bar">
+            <div class="heatmap-stat-item">
+              <p>Active Vehicles</p>
+              <p id="map-val-vehicles">849</p>
+            </div>
+            <div class="heatmap-stat-item">
+              <p>On-Time Perf.</p>
+              <p id="map-val-perf">92%</p>
+            </div>
+            <div class="heatmap-stat-item">
+              <p>Avg. Trip Time</p>
+              <p id="map-val-time">28 min</p>
+            </div>
+            <div class="heatmap-stat-item">
+              <p>Trip Density</p>
+              <p id="map-val-density">High</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="optimization-banner">
+        <div class="opt-left">
+          <div class="opt-icon-box">
+            <span class="material-symbols-outlined">bolt</span>
+          </div>
+          <div class="opt-text">
+            <h4>System Optimization Alert</h4>
+            <p>AI suggests re-routing Sector 7 to decrease fuel consumption by 4% based on today's traffic patterns.</p>
+          </div>
+        </div>
+        <button class="btn-apply-opt" id="apply-opt-btn">Apply Optimization</button>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <span>&copy; 2026 TransitOps Velocity Design System. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">System Status</a>
+    </div>
+  </footer>
+</div>
+
+<script src="../JS/analytics.js"></script>
+</body>
+</html>

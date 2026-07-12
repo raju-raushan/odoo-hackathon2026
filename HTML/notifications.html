@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Notification Center | TransitOps</title>
+<meta name="description" content="TransitOps notification inbox — view fleet alerts, trip exceptions, maintenance schedules, and system reports."/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet"/>
+<link rel="stylesheet" href="../CSS/notifications.css"/>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="brand"><h1>TransitOps</h1><p>Smart Fleet Management</p></div>
+  <nav>
+    <a class="nav-item" href="dashboard.html" id="nav-dashboard"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
+    <a class="nav-item" href="fleet_registry.html" id="nav-fleet"><span class="material-symbols-outlined">local_shipping</span>Fleet</a>
+    <a class="nav-item" href="drivers.html" id="nav-drivers"><span class="material-symbols-outlined">person</span>Drivers</a>
+    <a class="nav-item" href="trip_dispatcher.html" id="nav-trips"><span class="material-symbols-outlined">route</span>Trips</a>
+    <a class="nav-item" href="maintenance.html" id="nav-maintenance"><span class="material-symbols-outlined">build</span>Maintenance</a>
+    <a class="nav-item" href="fuelExpense.html" id="nav-fuel"><span class="material-symbols-outlined">local_gas_station</span>Fuel &amp; Expenses</a>
+    <a class="nav-item" href="analytics.html" id="nav-analytics"><span class="material-symbols-outlined">analytics</span>Analytics</a>
+    <a class="nav-item" href="profile.html" id="nav-settings"><span class="material-symbols-outlined">settings</span>Settings</a>
+  </nav>
+  <div class="sidebar-footer">
+    <a class="nav-item" href="#"><span class="material-symbols-outlined">contact_support</span>Support</a>
+    <a class="nav-item" href="signUp.html"><span class="material-symbols-outlined">logout</span>Log Out</a>
+  </div>
+</aside>
+
+<div class="main-wrap">
+  <header class="topbar">
+    <h2>Notification Center</h2>
+    <div class="topbar-right">
+      <div class="nav-toggle-wrap">
+        <span class="nav-toggle-item active" id="toggle-notifications">Notifications</span>
+        <span class="nav-toggle-item" id="toggle-archive">Archive</span>
+      </div>
+      <div class="topbar-icons">
+        <button><span class="material-symbols-outlined">help</span></button>
+        <div class="user-info">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCrlvWWhzHStkfNtpMYKqcvibBzFzjn7iP4R1h80EROHHB7XzIhNVqxy1oPzGIIqJizz1b0SUVC-fGaXIybPyMkMFY5hQDdsdCeyVVvOO-GyAEVtYSAk7KokURH-JCNDAO07fNeqH6PeQQFAQ7wnBTPaL9AbmLOQkpfB5SAAwkwSwCcjrEyacWIa4lFOEbypi_53kx7MWq8ygbH7JcSjdeT3dGwlnIFUzK6Ato6ko3MuPFKk2yWt7JaA" alt="Raven K."/>
+          <span>Dispatcher</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="content-area">
+    <div class="content-container">
+      <section class="filters-header">
+        <div class="filter-pills">
+          <button class="filter-pill active" data-filter="all">All</button>
+          <button class="filter-pill" data-filter="critical">Critical</button>
+          <button class="filter-pill" data-filter="fleet">Fleet</button>
+          <button class="filter-pill" data-filter="system">System</button>
+        </div>
+        <div class="actions-wrap">
+          <div class="search-box">
+            <span class="material-symbols-outlined">search</span>
+            <input type="text" placeholder="Search notifications..." id="search-input"/>
+          </div>
+          <button class="btn-ghost-action" id="mark-all-read">
+            <span class="material-symbols-outlined">done_all</span>
+            Mark all as read
+          </button>
+        </div>
+      </section>
+
+      <div class="notifications-groups" id="groups-container">
+        <div class="group-section" id="group-today">
+          <h3 class="group-title">Today <span class="dot"></span></h3>
+          <div class="notifications-list">
+            <div class="notification-card unread" data-category="critical">
+              <div class="icon-wrapper critical">
+                <span class="material-symbols-outlined">error</span>
+              </div>
+              <div class="notification-content">
+                <div class="notification-header">
+                  <h4 class="notification-title">Vehicle VAN-05: Engine Overheat Alert</h4>
+                  <span class="notification-time">09:42 AM</span>
+                </div>
+                <p class="notification-desc">Engine temperature exceeded 110&deg;C on Route B-12. Immediate inspection required to avoid block damage.</p>
+                <div class="notification-footer">
+                  <span class="category-tag critical">Critical Alert</span>
+                  <button class="action-link" onclick="window.location.href='maintenance.html'">
+                    Open Maintenance Hub
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="notification-card unread" data-category="fleet">
+              <div class="icon-wrapper trip">
+                <span class="material-symbols-outlined">check_circle</span>
+              </div>
+              <div class="notification-content">
+                <div class="notification-header">
+                  <h4 class="notification-title">Trip TR001: Completed by Alex Rivera</h4>
+                  <span class="notification-time">08:15 AM</span>
+                </div>
+                <p class="notification-desc">Final delivery confirmed at Main Distribution Hub. No damages reported. Fuel efficiency 100%.</p>
+                <div class="notification-footer">
+                  <span class="category-tag trip">Trip Update</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="group-section" id="group-earlier">
+          <h3 class="group-title">Earlier</h3>
+          <div class="notifications-list">
+            <div class="notification-card read" data-category="fleet">
+              <div class="icon-wrapper maintenance">
+                <span class="material-symbols-outlined">build</span>
+              </div>
+              <div class="notification-content">
+                <div class="notification-header">
+                  <h4 class="notification-title">TRUCK-11: Scheduled Service in 2 days</h4>
+                  <span class="notification-time">Yesterday</span>
+                </div>
+                <p class="notification-desc">Preventative maintenance window opens Friday. Estimated duration: 4 hours.</p>
+                <div class="notification-footer">
+                  <span class="category-tag maintenance">Maintenance</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="notification-card read" data-category="system">
+              <div class="icon-wrapper system">
+                <span class="material-symbols-outlined">description</span>
+              </div>
+              <div class="notification-content">
+                <div class="notification-header">
+                  <h4 class="notification-title">New Fleet Registry Report Available</h4>
+                  <span class="notification-time">Oct 24, 2023</span>
+                </div>
+                <p class="notification-desc">The Q3 registry audit report is now finalized and ready for export to PDF/Excel.</p>
+                <div class="notification-footer">
+                  <span class="category-tag system">System</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="notification-card read" data-category="fleet">
+              <div class="icon-wrapper trip">
+                <span class="material-symbols-outlined">local_shipping</span>
+              </div>
+              <div class="notification-content">
+                <div class="notification-header">
+                  <h4 class="notification-title">VAN-02: Route Deviation Detected</h4>
+                  <span class="notification-time">Oct 23, 2023</span>
+                </div>
+                <p class="notification-desc">Driver Mark Stevens detoured via North Hwy to avoid heavy construction traffic.</p>
+                <div class="notification-footer">
+                  <span class="category-tag trip">Trip Update</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty-state" id="empty-state">
+        <div class="empty-illustration">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRfl0ViVKxH32vuVIz5VGSUfsPvaYwmg7G19CWrcnFfyOKnVTvSL3qi-SqMRVKwSI7w4QllsKFR3pJE1V3yHpc7DCJ5rVdxBglytdOlCF8WaXo-_rs3N_B_4PdRxXTMA8jeB7pXqgsAugtX2-R1Ru3Pd7d5vX7bq77Zyb2-0Q1IkTt_X63SJezvVQaFhlhQGZCFdOe5t8XmU6m_CjCXktJ711kzlGl72WaHCiawo1yL3siyWpJSueINg" alt="No notifications"/>
+        </div>
+        <h4 class="empty-title">All caught up!</h4>
+        <p class="empty-desc">No notifications match your current filter. Try selecting 'All' or adjusting your search query.</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<button class="fab" id="fab-alert">
+  <span class="material-symbols-outlined">notification_important</span>
+  <span class="fab-tooltip">Quick Alert</span>
+</button>
+
+<script src="../JS/notifications.js"></script>
+</body>
+</html>

@@ -77,3 +77,11 @@ if (fabEmergency) {
     alert('Emergency breakdown signal dispatched to nearby support units!');
   });
 }
+
+var notifBtn = document.getElementById('notif-btn');
+if (notifBtn) {
+  notifBtn.addEventListener('click', function () {
+    window.location.href = 'notifications.html';
+  });
+}
+

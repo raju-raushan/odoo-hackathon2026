@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Driver Management | TransitOps</title>
+<meta name="description" content="Manage your vehicle operators, monitor safety scores, track compliance status, and dispatch drivers."/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet"/>
+<link rel="stylesheet" href="../CSS/drivers.css"/>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="brand"><h1>TransitOps</h1><p>Smart Fleet Management</p></div>
+  <nav>
+    <a class="nav-item" href="dashboard.html" id="nav-dashboard"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
+    <a class="nav-item" href="fleet_registry.html" id="nav-fleet"><span class="material-symbols-outlined">local_shipping</span>Fleet</a>
+    <a class="nav-item active" href="#" id="nav-drivers"><span class="material-symbols-outlined">person</span>Drivers</a>
+    <a class="nav-item" href="trip_dispatcher.html" id="nav-trips"><span class="material-symbols-outlined">route</span>Trips</a>
+    <a class="nav-item" href="maintenance.html" id="nav-maintenance"><span class="material-symbols-outlined">build</span>Maintenance</a>
+    <a class="nav-item" href="fuelExpense.html" id="nav-fuel"><span class="material-symbols-outlined">local_gas_station</span>Fuel &amp; Expenses</a>
+    <a class="nav-item" href="analytics.html" id="nav-analytics"><span class="material-symbols-outlined">analytics</span>Analytics</a>
+    <a class="nav-item" href="profile.html" id="nav-settings"><span class="material-symbols-outlined">settings</span>Settings</a>
+  </nav>
+  <div class="sidebar-footer">
+    <a class="nav-item" href="#"><span class="material-symbols-outlined">contact_support</span>Support</a>
+    <a class="nav-item" href="signUp.html"><span class="material-symbols-outlined">logout</span>Log Out</a>
+  </div>
+</aside>
+
+<div class="main-wrap">
+  <header class="topbar">
+    <div class="topbar-left-wrap">
+      <h2>Driver Directory</h2>
+      <div class="search-box">
+        <span class="material-symbols-outlined">search</span>
+        <input type="text" placeholder="Search drivers, license IDs, or vehicles..." id="search-input"/>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-icons">
+        <button id="notif-btn">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="notif-badge"></span>
+        </button>
+        <button><span class="material-symbols-outlined">help</span></button>
+      </div>
+      <div class="user-info">
+        <div class="text"><p>Raven K.</p><p>Dispatcher</p></div>
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDd4X-mnPpfCYnq9TnSLRT-xk75EjHafpuPccjsE4zM7jInJE-FAPKNxFv8cqC-lNsOvr9AJya_yYD0BzdMiUhC4Laa9tRH4F2tPYYuzv3hDa8uht3lqVl1rXLUY-BPwJhdg8fDUimGY-_-XMcWcD34gzjMe9pCgtgnIXb3jVw7cDRYg35ZYinDtL-DiW4HeoPnO52LSvWV3jZ6qO5ghOiz7-oBZBBiiislJ8WOJcCacT_zbGHpOrWZqw" alt="Raven K."/>
+      </div>
+    </div>
+  </header>
+
+  <main class="content-area">
+    <div class="content-container">
+      <section class="metrics-grid">
+        <div class="metric-card border-secondary">
+          <div class="metric-header">
+            <span>Total Drivers</span>
+            <span class="material-symbols-outlined color-secondary">groups</span>
+          </div>
+          <div class="metric-body">
+            <span class="metric-value">142</span>
+            <span class="metric-subtitle color-amber">+4 this month</span>
+          </div>
+        </div>
+        <div class="metric-card border-green">
+          <div class="metric-header">
+            <span>On Road</span>
+            <span class="material-symbols-outlined color-green">sensors</span>
+          </div>
+          <div class="metric-body">
+            <span class="metric-value">98</span>
+            <span class="metric-subtitle">69% Utilization</span>
+          </div>
+        </div>
+        <div class="metric-card border-red">
+          <div class="metric-header">
+            <span>Compliance Alerts</span>
+            <span class="material-symbols-outlined color-red">warning</span>
+          </div>
+          <div class="metric-body">
+            <span class="metric-value color-red">7</span>
+            <span class="metric-subtitle">Expiring soon</span>
+          </div>
+        </div>
+        <div class="metric-card border-amber">
+          <div class="metric-header">
+            <span>Avg Safety Score</span>
+            <span class="material-symbols-outlined color-amber">verified</span>
+          </div>
+          <div class="metric-body">
+            <span class="metric-value">4.8</span>
+            <span class="metric-subtitle">/ 5.0</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="table-section">
+        <div class="table-header-row">
+          <div style="display:flex;align-items:center">
+            <div class="tab-group">
+              <button class="tab-btn active" id="tab-all">All Drivers</button>
+              <button class="tab-btn" id="tab-duty">On Duty</button>
+              <button class="tab-btn" id="tab-off">Off Duty</button>
+            </div>
+            <button class="filter-btn">
+              <span class="material-symbols-outlined" style="font-size:18px">filter_list</span>
+              <span>Filter</span>
+            </button>
+          </div>
+          <button class="btn-primary" id="register-driver-btn">
+            <span class="material-symbols-outlined" style="font-size:18px">person_add</span>
+            <span>Register Driver</span>
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="directory-table" id="directory-table">
+            <thead>
+              <tr>
+                <th>Driver Details</th>
+                <th>Status</th>
+                <th>Vehicle</th>
+                <th>Compliance</th>
+                <th>Safety Score</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="driver-detail-cell">
+                    <div class="driver-avatar">
+                      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlZdHml_NTNf3swt5YtqI5OtRL2Xr5ETs0_qS49Pyif40ZtRoj8CZE2WGhE1gyEAFWG-JFhGcvEuI4s5xDNSDVq9-TnOzR5CNyyyHuNRn48Qp1Y-i4UidxqvwE698EAgJJfM_Yuu7NNbGbQN42rUvUkIfOe-BHWm48J-YuAFu8b0ty8OsvvhVUAjFagxROQCl90PjIyJNf39UZxnox_c2bznTmtSkpzZ5hrNG6kDlZpVnYkR4sbK8z3A" alt="Marcus Thorne"/>
+                    </div>
+                    <div>
+                      <p class="driver-name">Marcus Thorne</p>
+                      <p class="driver-meta">ID: TX-90042 &bull; +1 (555) 012-3456</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <span class="status-badge active"><span class="dot"></span>Active</span>
+                </td>
+                <td>
+                  <div class="vehicle-info-cell">
+                    <p class="vehicle-name">Freightliner Cascadia</p>
+                    <p class="vehicle-meta">VIN: ...4459 &bull; TRK-882</p>
+                  </div>
+                </td>
+                <td>
+                  <div class="compliance-cell current">
+                    <span class="material-symbols-outlined">verified</span>
+                    <span>Current</span>
+                  </div>
+                  <p class="compliance-expiry">Expires: Dec 2025</p>
+                </td>
+                <td>
+                  <div class="safety-rating">
+                    <span>4.9</span>
+                    <div class="safety-stars">
+                      <span class="material-symbols-outlined">star</span>
+                      <span class="material-symbols-outlined">star</span>
+                      <span class="material-symbols-outlined">star</span>
+                      <span class="material-symbols-outlined">star</span>
+                      <span class="material-symbols-outlined">star</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <button class="action-btn"><span class="material-symbols-outlined">more_vert</span></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="driver-detail-cell">
+                    <div class="driver-avatar">
+                      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHo4Uoqe_HJ2ZOIMnZeLuFtWxZJ5XY_U8zNewqxf38CN7MIBLwCFykJUCY67t1IZuk3yiOqYNcbrh02x84TuXg2O8boq__B8wHwoTSfg7VGLCW_sOj-kguP-5i9KUgAeVQ-E15opYupj_S2UPsh9iczYEtNrDR6Bzzu48sRG2ZtRIT6JCUI__c9UTwhOASbLGOBHm8OVKsiRd_053kt1jIK3922V9VJEuiNNMcU43kjKRWaWKLz6LI9A" alt="Sarah Jenkins"/>
+                    </div>
+                    <div>
+                      <p class="driver-name">Sarah Jenkins</p>
+                      <p class="driver-meta">ID: CA-11283 &bull; +1 (555) 098-7654</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <span class="status-badge off-duty"><span class="dot"></span>Off Duty</span>
+                </td>
+                <td>
+                  <div class="vehicle-info-cell">
+                    <p class="vehicle-name">Kenworth T680</p>
+                    <p class="vehicle-meta">VIN: ...2210 &bull; TRK-104</p>
+                  </div>
+                </td>
+                <td>
+                  <div class="compliance-cell expiring">
+                    <span class="material-symbols-outlined">notification_important</span>
+                    <span>Expiring</span>
+                  </div>
+                  <p class="compliance-expiry error-color">CDL expires in 12 days</p>
+                </td>
+                <td>
+                  <div class="safety-rating">
+                    <span>4.2</span>
+                    <div class="safety-stars">
+                      <span class="material-symbols-outlined">star</span>
+                      <span class="material-symbols-outlined">star</span>
+                      <span class="material-symbols-outlined">star</span>
+                      <span class="material-symbols-outlined">star</span>
+                      <span class="material-symbols-outlined empty">star</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <button class="action-btn"><span class="material-symbols-outlined">more_vert</span></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="driver-detail-cell">
+                    <div class="driver-avatar">
+                      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoHGqhLy5c5oIRJQNClLBVlmWtAyc9klMkSg1PgdT2SV65lXsr_XSSVMDueiwriAbxzAyup6-G_lwZUQctLfakbXdM4VNeJhp5ffX6pDz8D1zCBAgXxQWNO_rU1QUpBt1VBcsXuDx1x8c7RbIzbfOrixX7jbG9uKuFjAl3F-OBghrRakb1cJlPa4jdzg6NbrFemNJ9ddxxeIXuQYbPxZXJZDgFK6S0bNp5mM0geKzSkpTKLMruy8fTww" alt="Robert 'Bob' Vance"/>
+                    </div>
+                    <div>
+                      <p class="driver-name">Robert 'Bob' Vance</p>
+                      <p class="driver-meta">ID: PA-44211 &bull; +1 (555) 234-5678</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <span class="status-badge maintenance"><span class="dot"></span>In Maintenance</span>
+                </td>
+                <td>
+                  <div class="vehicle-info-cell">
+                    <p class="vehicle-name">Peterbilt 579</p>
+                    <p class="vehicle-meta">VIN: ...8892 &bull; TRK-551</p>
+                  </div>
+                </td>
+                <td>
+                  <div class="compliance-cell current">
+                    <span class="material-symbols-outlined">verified</span>
+                    <span>Current</span>
+                  </div>
+                  <p class="compliance-expiry">Expires: Jan 2026</p>
+                </td>
+                <td>
+                  <div class="safety-rating">
+                    <span>5.0</span>
+                    <div class="safety-stars">
+                      <span class="material-symbols-outlined">star</span>
+                      <span class="material-symbols-outlined">star</span>
+                      <span class="material-symbols-outlined">star</span>
+                      <span class="material-symbols-outlined">star</span>
+                      <span class="material-symbols-outlined">star</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <button class="action-btn"><span class="material-symbols-outlined">more_vert</span></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <p class="pagination-text">Showing 1-3 of 142 drivers</p>
+          <div class="pagination-controls">
+            <button class="pagination-btn" disabled id="page-prev"><span class="material-symbols-outlined">chevron_left</span></button>
+            <span class="pagination-page">Page 1 of 15</span>
+            <button class="pagination-btn" id="page-next"><span class="material-symbols-outlined">chevron_right</span></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="insights-grid">
+        <div class="insights-card">
+          <h3>Upcoming Compliance Deadlines</h3>
+          <div class="deadlines-list">
+            <div class="deadline-item bg-red">
+              <div class="deadline-icon-wrap"><span class="material-symbols-outlined">assignment_late</span></div>
+              <div class="deadline-info">
+                <p class="deadline-title">Medical Certificate Renewal</p>
+                <p class="deadline-meta">Driver: Marcus Thorne &bull; Due in 4 days</p>
+              </div>
+              <button class="deadline-action-btn">Remind</button>
+            </div>
+            <div class="deadline-item bg-amber">
+              <div class="deadline-icon-wrap"><span class="material-symbols-outlined">event</span></div>
+              <div class="deadline-info">
+                <p class="deadline-title">CDL License Expiration</p>
+                <p class="deadline-meta">Driver: Sarah Jenkins &bull; Due in 12 days</p>
+              </div>
+              <button class="deadline-action-btn">Update</button>
+            </div>
+            <div class="deadline-item bg-gray">
+              <div class="deadline-icon-wrap"><span class="material-symbols-outlined">history</span></div>
+              <div class="deadline-info">
+                <p class="deadline-title">Annual Safety Review</p>
+                <p class="deadline-meta">Driver: Bob Vance &bull; Due in 28 days</p>
+              </div>
+              <button class="deadline-action-btn">Schedule</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="insights-card">
+          <div class="scoreboard-header">
+            <h3>Top Performing Drivers</h3>
+            <span>View All</span>
+          </div>
+          <div class="scoreboard-list">
+            <div class="scoreboard-item">
+              <div class="scoreboard-left">
+                <span class="scoreboard-rank">#1</span>
+                <div class="scoreboard-avatar"><span class="material-symbols-outlined">person</span></div>
+                <div>
+                  <p class="scoreboard-driver-name">Liam Peterson</p>
+                  <p class="scoreboard-driver-meta">9,420 miles logged</p>
+                </div>
+              </div>
+              <div class="scoreboard-right">
+                <p class="scoreboard-score">5.00</p>
+                <p class="scoreboard-label">Safety Rating</p>
+              </div>
+            </div>
+            <div class="scoreboard-item">
+              <div class="scoreboard-left">
+                <span class="scoreboard-rank">#2</span>
+                <div class="scoreboard-avatar"><span class="material-symbols-outlined">person</span></div>
+                <div>
+                  <p class="scoreboard-driver-name">Robert 'Bob' Vance</p>
+                  <p class="scoreboard-driver-meta">12,150 miles logged</p>
+                </div>
+              </div>
+              <div class="scoreboard-right">
+                <p class="scoreboard-score">5.00</p>
+                <p class="scoreboard-label">Safety Rating</p>
+              </div>
+            </div>
+            <div class="scoreboard-item">
+              <div class="scoreboard-left">
+                <span class="scoreboard-rank">#3</span>
+                <div class="scoreboard-avatar"><span class="material-symbols-outlined">person</span></div>
+                <div>
+                  <p class="scoreboard-driver-name">Elena Rodriguez</p>
+                  <p class="scoreboard-driver-meta">8,810 miles logged</p>
+                </div>
+              </div>
+              <div class="scoreboard-right">
+                <p class="scoreboard-score">4.98</p>
+                <p class="scoreboard-label">Safety Rating</p>
+              </div>
+            </div>
+          </div>
+          <div class="composition-section">
+            <p class="composition-label">Fleet Composition</p>
+            <div class="composition-bar">
+              <div class="composition-segment class-a" title="Class A Drivers"></div>
+              <div class="composition-segment class-b" title="Class B Drivers"></div>
+              <div class="composition-segment other" title="Others"></div>
+            </div>
+            <div class="composition-legend">
+              <span class="composition-legend-item">Class A (50%)</span>
+              <span class="composition-legend-item">Class B (33%)</span>
+              <span class="composition-legend-item">Other (17%)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<button class="fab" id="fab-add-driver"><span class="material-symbols-outlined">person_add</span></button>
+
+<script src="../JS/drivers.js"></script>
+</body>
+</html>

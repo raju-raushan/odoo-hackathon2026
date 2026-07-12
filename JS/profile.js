@@ -26,3 +26,11 @@ document.getElementById('save-btn').addEventListener('click', function () {
     }, 1500);
   }, 800);
 });
+
+var notifBtn = document.getElementById('notif-btn');
+if (notifBtn) {
+  notifBtn.addEventListener('click', function () {
+    window.location.href = 'notifications.html';
+  });
+}
+
