@@ -1,8 +1,8 @@
 # TO DO
 ### 1. Problem Statement Analysis - (Done)
-### 2. UI Design (In Progress)
+### 2. UI Design (done)
 ### 3. Database Design and SetUp (In Progress)
-### 4. Development (Pending)
+### 4. Development (in progress)
 ### 5. Testing (Pending)
 ### 6. Completed (Pending)
 
